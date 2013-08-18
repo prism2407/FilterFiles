@@ -1,0 +1,44 @@
+﻿<Window x:Class="FileCompare.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" WindowState="Maximized" Width="1200">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel DataContext="{Binding FileSearchCriteria}" Orientation="Horizontal" Grid.Row="0" Margin="5">
+            <TextBlock Text="Search Directory : " />
+            <TextBox Text="{Binding Directory}" Width="800" />
+
+            <TextBlock Text="Date Modified > " Margin="15,0,0,0" VerticalAlignment="Center" />
+            <DatePickerTextBox Text="{Binding DateStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <StackPanel DataContext="{Binding FileSearchCriteria}" Orientation="Horizontal" Grid.Row="1" Margin="5">
+            <TextBlock Text="Skip Directory (CSV) : " />
+            <TextBox Text="{Binding SkipSubDirectories}" Width="250" />
+
+            <TextBlock Text="Search Criteria (CSV) : " Margin="10,0,0,0" />
+            <TextBox Text="{Binding FileCardExtensions}" Width="250" />
+
+            <Button Command="{Binding DataContext.SearchCommand, RelativeSource={RelativeSource AncestorType=Grid}}" Content="Search" Margin="5,0,0,0" />
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding SearchedFiles}" Grid.Row="2" Margin="5">
+        </DataGrid>
+        <!--<ListView ItemsSource="{Binding SearchedFiles}" Grid.Row="2" Margin="5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="FileName" Width="200" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Directory}" Header="Directory" Width="800" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=LastWriteTime}" Header="Date Modified" Width="150" />
+                </GridView>
+            </ListView.View>
+        </ListView>-->
+
+        <Button Grid.Row="3" Command="{Binding DataContext.CopytoTempFolderCommand, RelativeSource={RelativeSource AncestorType=Grid}}" Content="Copy Results to Temp Folder" Margin="5,0,0,0" />
+    </Grid>
+</Window>
