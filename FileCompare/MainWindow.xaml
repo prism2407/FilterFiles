@@ -29,6 +29,8 @@
         </StackPanel>
         <DataGrid ItemsSource="{Binding SearchedFiles}" Grid.Row="2" Margin="5">
         </DataGrid>
+        
+        
         <!--<ListView ItemsSource="{Binding SearchedFiles}" Grid.Row="2" Margin="5">
             <ListView.View>
                 <GridView>
